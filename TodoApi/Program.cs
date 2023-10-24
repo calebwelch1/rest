@@ -1,8 +1,19 @@
+//In ASP.NET Core, services such as the DB
+// context must be registered with the dependency
+// injection (DI) container. The container provides
+// the service to controllers.
+
+using Microsoft.EntityFrameworkCore;
+using TodoApi.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+// database context
+builder.Services.AddDbContext<TodoContext>(opt =>
+    opt.UseInMemoryDatabase("TodoList"));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
